@@ -6,13 +6,8 @@ package me.yiii.RCTIJKPlayer;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.facebook.react.bridge.Arguments;
@@ -22,8 +17,6 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
-
-import java.util.LinkedList;
 
 public class RCTIJKPlayerView extends FrameLayout {
     private static final String TAG = "RCTIJKPlayerView";
@@ -37,10 +30,10 @@ public class RCTIJKPlayerView extends FrameLayout {
         return this.mIJKPlayerView;
     }
 
-    public RCTIJKPlayerView(Context context, Activity activity) {
+    public RCTIJKPlayerView(Context context) {
         super(context);
         this._context = context;
-        this.activity = activity;
+
         Log.e(TAG, "*******constructor start");
         // framelayout = new FrameLayout(context);
 
@@ -63,6 +56,10 @@ public class RCTIJKPlayerView extends FrameLayout {
         // addView(framelayout);
         addView(mIJKPlayerView);
         // mIJKPlayerView.setContainer(this);
+    }
+
+    public void init(Activity activity){
+        this.activity = activity;
     }
 
     public void refresh() {

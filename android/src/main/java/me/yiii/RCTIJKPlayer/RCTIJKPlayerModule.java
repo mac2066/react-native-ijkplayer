@@ -4,6 +4,7 @@
 
 package me.yiii.RCTIJKPlayer;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.facebook.react.bridge.Promise;
@@ -11,9 +12,9 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.WritableNativeMap;
-import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.UiThreadUtil;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public class RCTIJKPlayerModule extends ReactContextBaseJavaModule {
     public RCTIJKPlayerModule(ReactApplicationContext reactContext) {
         super(reactContext);
         _reactContext = reactContext;
+
     }
 
     @Override
@@ -46,11 +48,17 @@ public class RCTIJKPlayerModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void init() {
+        Activity activity = getCurrentActivity();
+        RCTIJKPlayer.getViewInstance().init(activity);
+    }
+
+    @ReactMethod
     public void start(final ReadableMap options, final Promise promise) {
         final String URL = options.getString("url");
         UiThreadUtil.runOnUiThread(new Runnable() {
             public void run() {
-                Log.e(TAG, "****start URL: " + URL);
+                Log.d(TAG, "****start URL: " + URL);
                 RCTIJKPlayer.getViewInstance().start(URL);
             }
         });
@@ -58,31 +66,31 @@ public class RCTIJKPlayerModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void stop() {
-        Log.e(TAG, "stop");
+        Log.d(TAG, "stop");
         RCTIJKPlayer.getViewInstance().stop();
     }
 
     @ReactMethod
     public void pause() {
-        Log.e(TAG, "pause");
+        Log.d(TAG, "pause");
         RCTIJKPlayer.getViewInstance().pause();
     }
 
     @ReactMethod
     public void resume() {
-        Log.e(TAG, "resume");
+        Log.d(TAG, "resume");
         RCTIJKPlayer.getViewInstance().resume();
     }
 
     @ReactMethod
     public void shutdown() {
-        Log.e(TAG, "shutdown");
+        Log.d(TAG, "shutdown");
         RCTIJKPlayer.getViewInstance().shutdown();
     }
 
     @ReactMethod
     public void seekTo(double currentPlaybackTime) {
-        Log.e(TAG, "seekTo "+ currentPlaybackTime);
+        Log.d(TAG, "seekTo "+ currentPlaybackTime);
         RCTIJKPlayer.getViewInstance().seekTo(currentPlaybackTime);
     }
 

@@ -71,6 +71,11 @@ export default class RCTIJKPlayer extends Component {
         return <_RCTIJKPlayer ref={REF} {...nativeProps} />;
     }
 
+    init() {
+        console.log("ijkplayer index init");
+        return IJKPlayerManager.init();
+    }
+
     start(options) {
         console.log("ijkplayer index start begin");
         return IJKPlayerManager.start(options);
